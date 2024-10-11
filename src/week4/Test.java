@@ -11,24 +11,25 @@ public class Test {
             jee.printPersonMessage();
         }
         if (jee instanceof Student) {
-            ((Student) jee).printStudentMessage();
+            jee.printMessage("Student");
         }
         if (kim instanceof Student) {
-            ((Student) kim).printStudentMessage();
+            kim.printMessage("Student");
         }
         if (kim instanceof Professor) {
-            ((Professor) kim).printProfessorMessage();
+            kim.printMessage("Professor");
         }
         if (kim instanceof Researcher) {
-            ((Researcher) kim).printResearcherMessage();
+            kim.printMessage("Researcher");
         }
         if (lee instanceof Professor) {
-            ((Professor) lee).printProfessorMessage();
+            lee.printMessage("Professor");
         }
     }
 }
 
 class Person {
+
     private String name;
 
     public Person(String name) {
@@ -39,37 +40,33 @@ class Person {
         return name;
     }
 
+    // 예제의 main()을 건드리지 않기 위해 존재. 없어도 무방
     public void printPersonMessage() {
-        System.out.println(getName() + "는 Person으로 캐스팅할 수 있다.");
+        printMessage("Person");
+    }
+
+    public void printMessage(String personType) {
+        System.out.println(getName() + "은 " + personType + "으로 캐스팅할 수 있다");
     }
 }
 
 class Student extends Person {
+
     public Student(String name) {
         super(name);
-    }
-
-    public void printStudentMessage() {
-        System.out.println(getName() + "는 Student로 캐스팅할 수 있다.");
     }
 }
 
 class Researcher extends Person {
+
     public Researcher(String name) {
         super(name);
-    }
-
-    public void printResearcherMessage() {
-        System.out.println(getName() + "는 Researcher로 캐스팅할 수 있다.");
     }
 }
 
 class Professor extends Researcher {
+
     public Professor(String name) {
         super(name);
-    }
-
-    public void printProfessorMessage() {
-        System.out.println(getName() + "는 Professor로 캐스팅할 수 있다.");
     }
 }

@@ -4,11 +4,12 @@ public class InheritanceTest {
 
     public static void main(String[] args) {
         WaterCar car = new WaterCar(5, 3, 2);
-        car.shoeCurrentGauge();
+        car.showCurrentGauge();
     }
 }
 
 class GasolineCar {
+
     private int gasolineGauge;
 
     public GasolineCar(int gasolineGauge) {
@@ -21,6 +22,7 @@ class GasolineCar {
 }
 
 class ElectricCar extends GasolineCar {
+
     private int ElectricGauge;
 
     public ElectricCar(int gasolineGauge, int electricGauge) {
@@ -34,6 +36,7 @@ class ElectricCar extends GasolineCar {
 }
 
 class WaterCar extends ElectricCar {
+
     private int waterGauge;
 
     public WaterCar(int gasolineGauge, int electricGauge, int waterGauge) {
@@ -45,7 +48,7 @@ class WaterCar extends ElectricCar {
         return waterGauge;
     }
 
-    public void shoeCurrentGauge() {
+    public void showCurrentGauge() {
         System.out.println("가솔린 양 : " + getGasolineGauge());
         System.out.println("전기 양 : " + getElectricGauge());
         System.out.println("물 양 : " + getWaterGauge());

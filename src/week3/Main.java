@@ -23,6 +23,10 @@ class Man {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void showInfo() {
+        System.out.println("My name is " + getName());
+    }
 }
 
 class BusinessMan extends Man {
@@ -46,8 +50,9 @@ class BusinessMan extends Man {
         this.position = position;
     }
 
+    @Override
     public void showInfo() {
-        System.out.println("My name is " + getName());
+        super.showInfo();
         System.out.println("My company is " + getCompany());
         System.out.println("My position is " + getPosition());
     }
