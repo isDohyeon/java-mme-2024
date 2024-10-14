@@ -1,4 +1,4 @@
-package week2;
+package java02;
 
 public class Main {
 
