@@ -21,12 +21,6 @@ public class JavaTest {
 
 abstract class Shape {
 
-    protected int length;
-
-    public Shape(int length) {
-        this.length = length;
-    }
-
     protected abstract double getArea();
 
     protected abstract double getPerimeter();
@@ -34,8 +28,10 @@ abstract class Shape {
 
 class Square extends Shape {
 
+    private final int length;
+
     public Square(int length) {
-        super(length);
+        this.length = length;
     }
 
     @Override
@@ -52,19 +48,20 @@ class Square extends Shape {
 class Circle extends Shape {
 
     private static final double PI = 3.14;
+    private final int radius;
 
-    public Circle(int length) {
-        super(length);
+    public Circle(int radius) {
+        this.radius = radius;
     }
 
     @Override
     protected double getArea() {
-        return PI * length * length;
+        return PI * radius * radius;
     }
 
     @Override
     protected double getPerimeter() {
-        return PI * 2 * length;
+        return PI * 2 * radius;
     }
 }
 
