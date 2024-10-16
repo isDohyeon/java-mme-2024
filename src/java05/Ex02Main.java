@@ -1,13 +1,6 @@
 package java05;
 
-interface PersonalNumberStorage {
-
-    void addPersonalInfo(String name, int age);
-
-    String searchName(int age);
-}
-
-public class Test {
+public class Ex02Main {
 
     public static void main(String[] args) {
         PersonalNumberStorage storage = new PersonalNumberStorageImp(100);
@@ -20,12 +13,19 @@ public class Test {
     }
 }
 
-class PersonalNumInfo {
+interface PersonalNumberStorage {
+
+    void addPersonalInfo(String name, int age);
+
+    String searchName(int age);
+}
+
+class PersonalInfo {
 
     private final String name;
     private final int age;
 
-    public PersonalNumInfo(String name, int age) {
+    public PersonalInfo(String name, int age) {
         this.name = name;
         this.age = age;
     }
@@ -41,16 +41,16 @@ class PersonalNumInfo {
 
 class PersonalNumberStorageImp implements PersonalNumberStorage {
 
-    PersonalNumInfo[] perArr;
-    int numOfPerInfo;
+    private final PersonalInfo[] perArr;
+    private int numOfPerInfo;
 
-    public PersonalNumberStorageImp(int size) {
-        perArr = new PersonalNumInfo[size];
+    public PersonalNumberStorageImp(int numOfMaxPer) {
+        perArr = new PersonalInfo[numOfMaxPer];
     }
 
     @Override
     public void addPersonalInfo(String name, int age) {
-        perArr[numOfPerInfo++] = new PersonalNumInfo(name, age);
+        perArr[numOfPerInfo++] = new PersonalInfo(name, age);
     }
 
     @Override

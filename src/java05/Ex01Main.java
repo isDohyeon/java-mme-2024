@@ -1,6 +1,6 @@
 package java05;
 
-public class JavaTest {
+public class Ex01Main {
 
     public static void main(String[] args) {
         Shape[] shape = new Shape[3];
