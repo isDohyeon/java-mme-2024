@@ -2,7 +2,7 @@
  * https://pastebin.com/DXgRBJG4
  */
 
-package java05;
+package java06;
 
 import java.util.Scanner;
 
@@ -122,30 +122,36 @@ class PhoneBookManager
         return new PhoneCompanyInfo(name, phone, company);
     }
 
-    public void inputData()
-    {
-        System.out.println("데이터 입력을 시작합니다..");
-        System.out.println("1. 일반, 2. 대학, 3. 회사");
-        System.out.print("선택>> ");
-        int choice=MenuViewer.keyboard.nextInt();
-        MenuViewer.keyboard.nextLine();
-        PhoneInfo info=null;
+    public void inputData() {
+        while (true) {
+            System.out.println("데이터 입력을 시작합니다..");
+            System.out.println("1. 일반, 2. 대학, 3. 회사");
+            System.out.print("선택>> ");
+            int choice=MenuViewer.keyboard.nextInt();
+            MenuViewer.keyboard.nextLine();
+            PhoneInfo info;
 
-        switch(choice)
-        {
-            case INPUT_SELECT.NORMAL:
-                info=readFriendInfo();
-                break;
-            case INPUT_SELECT.UNIV:
-                info=readUnivFriendInfo();
-                break;
-            case INPUT_SELECT.COMPANY:
-                info=readCompanyFriendInfo();
-                break;
+            try {
+                switch (choice) {
+                    case INPUT_SELECT.NORMAL:
+                        info = readFriendInfo();
+                        break;
+                    case INPUT_SELECT.UNIV:
+                        info = readUnivFriendInfo();
+                        break;
+                    case INPUT_SELECT.COMPANY:
+                        info = readCompanyFriendInfo();
+                        break;
+                    default:
+                        throw new InputException();
+                }
+                infoStorage[curCnt++]=info;
+                System.out.println("데이터 입력이 완료되었습니다. \n");
+                return;
+            } catch (InputException e) {
+                System.out.println(e.getMessage());
+            }
         }
-
-        infoStorage[curCnt++]=info;
-        System.out.println("데이터 입력이 완료되었습니다. \n");
     }
 
     public void searchData()
@@ -216,34 +222,42 @@ class MenuViewer
     }
 }
 
-public class Ex04Main
+class InputException extends Exception {
+    public InputException() {
+        super("잘못된 입력입니다.\n");
+    }
+}
+
+public class Ex02Main
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         PhoneBookManager manager=PhoneBookManager.createManagerInst();
         int choice;
 
-        while(true)
-        {
+        while(true) {
             MenuViewer.showMenu();
-
             choice=MenuViewer.keyboard.nextInt();
             MenuViewer.keyboard.nextLine();
 
-            switch(choice)
-            {
-                case INIT_MENU.INPUT:
-                    manager.inputData();
-                    break;
-                case INIT_MENU.SEARCH:
-                    manager.searchData();
-                    break;
-                case INIT_MENU.DELETE:
-                    manager.deleteData();
-                    break;
-                case INIT_MENU.EXIT:
-                    System.out.println("프로그램을 종료합니다.");
-                    return;
+            try {
+                switch (choice) {
+                    case INIT_MENU.INPUT:
+                        manager.inputData();
+                        break;
+                    case INIT_MENU.SEARCH:
+                        manager.searchData();
+                        break;
+                    case INIT_MENU.DELETE:
+                        manager.deleteData();
+                        break;
+                    case INIT_MENU.EXIT:
+                        System.out.println("프로그램을 종료합니다.");
+                        return;
+                    default:
+                        throw new InputException();
+                }
+            } catch (InputException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
