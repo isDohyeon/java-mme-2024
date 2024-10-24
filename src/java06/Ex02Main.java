@@ -4,6 +4,7 @@
 
 package java06;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 interface INIT_MENU
@@ -127,11 +128,10 @@ class PhoneBookManager
             System.out.println("데이터 입력을 시작합니다..");
             System.out.println("1. 일반, 2. 대학, 3. 회사");
             System.out.print("선택>> ");
-            int choice=MenuViewer.keyboard.nextInt();
-            MenuViewer.keyboard.nextLine();
             PhoneInfo info;
 
             try {
+                int choice = MenuViewer.keyboard.nextInt();
                 switch (choice) {
                     case INPUT_SELECT.NORMAL:
                         info = readFriendInfo();
@@ -148,8 +148,9 @@ class PhoneBookManager
                 infoStorage[curCnt++]=info;
                 System.out.println("데이터 입력이 완료되었습니다. \n");
                 return;
-            } catch (InputException e) {
-                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println(InputException.INPUT_EXCEPTION_MESSAGE);
+                MenuViewer.keyboard.nextLine();
             }
         }
     }
@@ -205,6 +206,7 @@ class PhoneBookManager
         }
         return -1;
     }
+
 }
 
 class MenuViewer
@@ -223,8 +225,11 @@ class MenuViewer
 }
 
 class InputException extends Exception {
+
+    public static final String INPUT_EXCEPTION_MESSAGE = "잘못된 입력입니다.\n";
+
     public InputException() {
-        super("잘못된 입력입니다.\n");
+        super(INPUT_EXCEPTION_MESSAGE);
     }
 }
 
@@ -232,14 +237,12 @@ public class Ex02Main
 {
     public static void main(String[] args) {
         PhoneBookManager manager=PhoneBookManager.createManagerInst();
-        int choice;
 
         while(true) {
             MenuViewer.showMenu();
-            choice=MenuViewer.keyboard.nextInt();
-            MenuViewer.keyboard.nextLine();
-
             try {
+                int choice = MenuViewer.keyboard.nextInt();
+
                 switch (choice) {
                     case INIT_MENU.INPUT:
                         manager.inputData();
@@ -258,6 +261,9 @@ public class Ex02Main
                 }
             } catch (InputException e) {
                 System.out.println(e.getMessage());
+            } catch (InputMismatchException e) {
+                System.out.println(InputException.INPUT_EXCEPTION_MESSAGE);
+                MenuViewer.keyboard.nextLine();
             }
         }
     }
