@@ -2,6 +2,7 @@ package java09;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -17,7 +18,7 @@ public class Ex01Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<Person> persons = new ArrayList<>();
+        List<Person> persons = loadPersons();
 
         while (true) {
             int input = readUserInput(sc);
@@ -31,7 +32,7 @@ public class Ex01Main {
                     inputPerson(sc, persons);
                     break;
                 case 2:
-                    printPersons();
+                    printPersons(persons);
                     break;
             }
         }
@@ -56,8 +57,7 @@ public class Ex01Main {
         persons.add(new Person(name, age));
     }
 
-    private static void printPersons() {
-        List<Person> persons = loadPersons();
+    private static void printPersons(List<Person> persons) {
         System.out.println("총 " + persons.size() + "명을 출력합니다.");
         for (Person person : persons) {
             person.showInfo();
@@ -77,6 +77,8 @@ public class Ex01Main {
                     e.printStackTrace();
                 }
             }
+        } catch (FileNotFoundException e) {
+            System.out.printf("%s 파일을 생성합니다.", FILE_PATH);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,12 +1,12 @@
-package java10;
+package java10.ex;
 
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class Ex02Main extends JFrame {
+public class Ex01Main extends JFrame {
 
-    public Ex02Main() {
+    public Ex01Main() {
         setTitle("BorderLayout Sample");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -20,6 +20,6 @@ public class Ex02Main extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Ex02Main();
+        new Ex01Main();
     }
 }
